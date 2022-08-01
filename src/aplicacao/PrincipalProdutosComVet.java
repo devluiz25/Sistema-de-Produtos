@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-import entidades.Produtos;
+import entidades.ProdutosComVet;
 
 public class PrincipalProdutosComVet {
 
@@ -35,12 +35,18 @@ public class PrincipalProdutosComVet {
 			System.out.print("INFORME A QUANTIDADE DE PRODUTOS A SER INSERIDOS: ");
 			int qtd = sc.nextInt();
 
-			Produtos[] vetProd = new Produtos[qtd];
+			ProdutosComVet[] vetProd = new ProdutosComVet[qtd];
 
 			for (int i = 0; i < qtd; i++) {
 				System.out
 						.println("----------------------------------------------------------------------------------");
 				System.out.println("*** INFORMAÇÕES DO PRODUTO ***");
+				System.out.print("INFORME O CODIGO DO " + (i + 1) + "º PRODUTO: ");
+				int codProd = sc.nextInt();
+				while (codProd == i) {
+					System.out.print("CODIGO DO PRODUTO JA EXISTE, INFORME OUTRO CODIGO: ");
+					codProd = sc.nextInt();
+				}
 				System.out.print("INFORME O NOME DO " + (i + 1) + "º PRODUTO: ");
 				sc.nextLine();
 				String nome = sc.nextLine();
@@ -49,17 +55,19 @@ public class PrincipalProdutosComVet {
 				System.out.print("INFORME O PREÇO DO " + (i + 1) + "º PRODUTO: ");
 				double precoProd = sc.nextDouble();
 
-				vetProd[i] = new Produtos(nome, quantidade, precoProd);
-				System.out.println();
-				System.out.println(vetProd[i].exibirInformacao());
+				vetProd[i] = new ProdutosComVet(codProd, nome, quantidade, precoProd);
 
+			}
+			System.out.println();
+			for (ProdutosComVet prod : vetProd) {
+				System.out.println(prod.exibirInformacao());
 			}
 
 			for (int i = 0; i < qtd; i++) {
 				System.out
 						.println("----------------------------------------------------------------------------------");
 				System.out.println("*** ATUALIZAÇÃO DOS PRODUTOS ADICIONADOS AO ESTOQUE ***");
-				System.out.print("INFORME A QAUNTIDADE A SER ADICIONADA NO ESTOQUE DO " + (i + 1) + "º PRODUTO: ");
+				System.out.print("INFORME A QUANTIDADE A SER ADICIONADA NO ESTOQUE DO " + (i + 1) + "º PRODUTO: ");
 				int qtdAdc = sc.nextInt();
 
 				vetProd[i].inserirProdutos(qtdAdc);
@@ -81,7 +89,7 @@ public class PrincipalProdutosComVet {
 				System.out.println(vetProd[i].exibirInformacao());
 
 			}
-			
+
 			System.out.println();
 			System.out.print("DESEJA REINICIAR O SISTEMA: ");
 			resp = sc.next().charAt(0);

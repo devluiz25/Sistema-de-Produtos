@@ -1,18 +1,24 @@
 package entidades;
 
-public class Produtos {
+public class ProdutosComVet {
 
+	private int codigoProduto;
 	private String nomeProduto;
 	private int quantidadeProduto;
 	private double precoProduto;
 
-	public Produtos() {
+	public ProdutosComVet() {
 	}
 
-	public Produtos(String nome, int quantidade, double preco) {
+	public ProdutosComVet(int codigoProduto, String nome, int quantidade, double preco) {
+		this.codigoProduto = codigoProduto;
 		nomeProduto = nome;
 		quantidadeProduto = quantidade;
 		precoProduto = preco;
+	}
+
+	public int getCodigoProduto() {
+		return codigoProduto;
 	}
 
 	public String getNomeProduto() {
@@ -53,7 +59,8 @@ public class Produtos {
 
 	public String exibirInformacao() {
 		String nome = nomeProduto.toUpperCase();
-		return "PRODUTO: " + nome + " ----- " + "QUANTIDADE: " + quantidadeProduto + " ----- "
+		return "CODIGO DO PRODUTO: " + codigoProduto + " ----- " 
+				+ "PRODUTO: " + nome + " ----- " + "QUANTIDADE: " + quantidadeProduto + " ----- "
 				+ String.format("PREÇO POR UNIDADE: R$%.2f%n", precoProduto) + " ----- "
 				+ String.format("PREÇO DA QUANTIDADE TOTAL: R$%.2f", precoEmEstoqueProduto());
 	}
